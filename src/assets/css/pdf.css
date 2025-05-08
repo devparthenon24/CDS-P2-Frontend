@@ -1,0 +1,56 @@
+@page {
+  size: auto;
+  margin: 0mm;
+}
+
+.pdf-small a,
+.pdf-small body,
+.pdf-small span,
+.pdf-small label,
+.pdf-small td,
+.pdf-small div {
+  font-size: 22px !important;
+  font-family: THSarabunNew !important;
+  line-height: 1;
+}
+.pdf a,
+.pdf body,
+.pdf span,
+.pdf label,
+.pdf td,
+.pdf div {
+  font-size: 22px !important;
+  font-family: THSarabunNew !important;
+  line-height: 1.3;
+}
+.ppf h1 { font-size: 32px !important;}
+.ppf h2 { font-size: 30px !important;}
+.ppf h3 { font-size: 28px !important;}
+.ppf h4 { font-size: 26px !important;}
+.ppf h5 { font-size: 24px !important;}
+.ppf h6 { font-size: 20px !important;}
+.pdf .table-bordered> :not(caption)>* {
+  border-width: 1px !important;
+}
+.pdf td {
+  padding-left: 6px !important;
+  padding-right: 6px !important;
+  border: #000000 1px solid
+}
+.pdf .table> :not(caption)>*>* {
+  padding:2px !important;
+}
+
+
+.pdf-small td {
+  padding-left: 6px !important;
+  padding-right: 6px !important;
+  border: #000000 1px solid
+}
+.pdf-small .table> :not(caption)>*>* {
+  padding:2px !important;
+}
+.pdf-small img {
+  width: 80px;
+  height: 80px;
+}
