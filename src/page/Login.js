@@ -26,8 +26,8 @@ export default class Login extends Component {
     };
     let result = await POST("api/login", body);
     if (result?.status) {
-      localStorage.setItem("cds-acc-tk", btoa("Token " + result.token));
-      localStorage.setItem("cds-profile", JSON.stringify(result.data));
+      localStorage.setItem("cds-acc-tk", btoa("Bearer " + result.data.token));
+      localStorage.setItem("cds-profile", JSON.stringify({...result.data, password: ""}));
       window.location.href = "/admin/console";
     }
     loading(false);

@@ -45,11 +45,11 @@ export default class NavbarComponent extends Component {
       ],
     };
   }
+  
   async componentDidMount() {}
   async componentDidUpdate() {}
-  icon = (icon) => {
-    return <label className="icon">{icon}</label>;
-  };
+  icon = (icon) => { return <label className="icon">{icon}</label> };
+  
   render() {
     return (
       <div>
