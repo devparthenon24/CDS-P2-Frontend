@@ -62,49 +62,78 @@ export default class NavbarComponent extends Component {
             }}
           ></div>
         )}
-        <Sidebar
-          className="position-fixed bg-white min-vh-100"
-          backgroundColor={"#ffffff"}
-          style={{ zIndex: 1000 }}
-          breakPoint="lg"
-          toggled={this.state.sidebar}
-          onFocus={() => {
-            this.setState({ sidebar: true });
-          }}
-        >
-          <Menu>
-            <div className="w-100 px-3 d-flex align-items-start justify-content-between my-2">
-              <img src={LOGO} height={42} alt="LOGO" className="mx-auto" />
-              <span
-                className="icon text-24 pointer d-block d-lg-none d-xl-none"
-                onClick={() => {
-                  this.setState({ sidebar: false });
-                }}
+       <Sidebar
+  className="position-fixed bg-white"
+  backgroundColor={"#ffffff"}
+  style={{
+    zIndex: 1000,
+    width: "250px",      // ความกว้าง sidebar คงที่
+    height: "100vh",     // ความสูงเต็มจอ
+    overflow: "hidden",  // ซ่อน scrollbar ด้านนอก
+  }}
+  breakPoint="lg"
+  toggled={this.state.sidebar}
+  onFocus={() => {
+    this.setState({ sidebar: true });
+  }}
+>
+  <Menu
+    className="d-flex flex-column"
+    style={{
+      height: "100%",
+      overflowY: "auto",   // ทำให้ scroll ได้
+      paddingBottom: "60px", // กันไม่ให้ติดขอบล่าง
+    }}
+  >
+    <div className="w-100 px-3 d-flex align-items-start justify-content-between my-2">
+      <img src={LOGO} height={42} alt="LOGO" className="mx-auto" />
+      <span
+        className="icon text-24 pointer d-block d-lg-none d-xl-none"
+        onClick={() => {
+          this.setState({ sidebar: false });
+        }}
+      >
+        {"\uf00d"}
+      </span>
+    </div>
+
+    {this.state.array_menu.map((item, index) => {
+      if (item.child.length === 0) {
+        return (
+          <MenuItem
+            key={index}
+            icon={this.icon(item.icon)}
+            active={window.location.pathname === item.route}
+            component={<Link to={item.route} />}
+          >
+            {item.name}
+          </MenuItem>
+        );
+      } else {
+        return (
+          <SubMenu
+            key={index}
+            icon={this.icon(item.icon)}
+            label={item.name}
+            defaultOpen={item.child.map((e) => e.route).includes(window.location.pathname)}
+          >
+            {item.child.map((child, cIndex) => (
+              <MenuItem
+                key={cIndex}
+                icon={this.icon(child.icon)}
+                active={window.location.pathname === child.route}  
+                component={<Link to={child.route} />}
               >
-                {"\uf00d"}
-              </span>
-            </div>
-            {this.state.array_menu.map((item, index) => {
-              if (item.child.length === 0) {
-                return (
-                  <MenuItem icon={this.icon(item.icon)} active={window.location.pathname === item.route} component={<Link to={item.route} />}>
-                    {item.name}
-                  </MenuItem>
-                );
-              } else {
-                return (
-                  <SubMenu icon={this.icon(item.icon)} label={item.name} defaultOpen={item.child.map((e) => e.route).includes(window.location.pathname)}>
-                    {item.child.map((child, index) => (
-                      <MenuItem icon={this.icon(child.icon)} active={window.location.pathname === item.route} component={<Link to={child.route} />}>
-                        {child.name}
-                      </MenuItem>
-                    ))}
-                  </SubMenu>
-                );
-              }
-            })}
-          </Menu>
-        </Sidebar>
+                {child.name}
+              </MenuItem>
+            ))}
+          </SubMenu>
+        );
+      }
+    })}
+  </Menu>
+</Sidebar>
+
         <div className="body d-flex align-items-center justify-content-between mb-1 px-3 py-2">
           <div className="d-flex align-items-center">
             {this.props.sidebar !== "false" && (

@@ -469,3 +469,6 @@ th {
 .form-control {
   border-radius: 8px;
 }
+.ps-menu-button {
+  height: 35px !important;
+}
